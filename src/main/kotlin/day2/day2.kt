@@ -24,7 +24,7 @@ class TobogganRentalPolicy(first: Int, second: Int, private val char: Char): Pol
 
     override fun isValidPassword(password: String): Boolean {
         val isMatchFirst = password.length >= first && password[first] == char
-        val isMatchSecond = password.length >= first && password[second] == char
+        val isMatchSecond = password.length >= second && password[second] == char
 
         return isMatchFirst xor isMatchSecond
     }
