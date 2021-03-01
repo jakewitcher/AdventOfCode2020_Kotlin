@@ -1,13 +1,29 @@
-import day1.findProductOfThreeExpenseReportEntriesEqualTo2020
-import day1.findProductOfTwoExpenseReportEntriesEqualTo2020
+import day1.findProductOfThreeExpenseReportEntriesEqualTo
+import day1.findProductOfTwoExpenseReportEntriesEqualTo
+import day2.countPasswordsValidatedBySledRentalPolicy
+import day2.countPasswordsValidatedByTobogganRentalPolicy
 
 fun main(args: Array<String>) {
-    val product = findProductOfThreeExpenseReportEntriesEqualTo2020()
+    day2Part1()
+    day2Part2()
+}
 
-    if (product == null) {
-        print("no product found")
-        return
-    }
+fun day1Part1() {
+    val product = findProductOfTwoExpenseReportEntriesEqualTo(2020, day1.readInputFile())
+    println("product of 2 expense report entries equal to 2020: $product")
+}
 
-    println("product of two numbers with sum of 2020 is $product")
+fun day1Part2() {
+    val product = findProductOfThreeExpenseReportEntriesEqualTo(2020, day1.readInputFile())
+    println("product of 3 expense report entries equal to 2020: $product")
+}
+
+fun day2Part1() {
+    val count = countPasswordsValidatedBySledRentalPolicy(day2.readInputFile())
+    println("valid sled rental passwords: $count")
+}
+
+fun day2Part2() {
+    val count = countPasswordsValidatedByTobogganRentalPolicy(day2.readInputFile())
+    println("valid toboggan rental passwords: $count")
 }

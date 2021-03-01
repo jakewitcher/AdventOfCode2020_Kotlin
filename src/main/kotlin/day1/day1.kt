@@ -2,19 +2,19 @@ package day1
 
 import java.io.File
 
-fun findProductOfTwoExpenseReportEntriesEqualTo2020(): Int? {
-    val numPair = findTwoEntriesWithSumEqualTo(2020, readInputFile()) ?: return null
-    return numPair.first * numPair.second
+fun findProductOfTwoExpenseReportEntriesEqualTo(target: Int, expenses: List<Int>): Int? {
+    val foundExpenses = findTwoEntriesWithSumEqualTo(target, expenses) ?: return null
+    return foundExpenses.first * foundExpenses.second
 }
 
-fun findProductOfThreeExpenseReportEntriesEqualTo2020(): Int? {
-    val numTriple = findThreeEntriesWithSumEqualTo(2020, readInputFile()) ?: return null
-    return numTriple.first * numTriple.second * numTriple.third
+fun findProductOfThreeExpenseReportEntriesEqualTo(target: Int, expenses: List<Int>): Int? {
+    val foundExpenses = findThreeEntriesWithSumEqualTo(target, expenses) ?: return null
+    return foundExpenses.first * foundExpenses.second * foundExpenses.third
 }
 
 fun findTwoEntriesWithSumEqualTo(target: Int, entries: List<Int>): Pair<Int, Int>? {
     return entries
-        .flatMapIndexed { i, entry1 -> entries.mapIndexed { j, entry2 ->
+        .flatMapIndexed { i, entry1 -> entries.subList(i + 1, entries.size).mapIndexed { j, entry2 ->
             if (i == j) null else Pair(entry1, entry2) } }
         .dropWhile { it == null || it.first + it.second != target }
         .firstOrNull()
@@ -22,7 +22,9 @@ fun findTwoEntriesWithSumEqualTo(target: Int, entries: List<Int>): Pair<Int, Int
 
 fun findThreeEntriesWithSumEqualTo(target: Int, entries: List<Int>): Triple<Int, Int, Int>? {
     return entries
-        .flatMapIndexed { i, entry1, -> entries.flatMapIndexed { j, entry2 -> entries.mapIndexed { k, entry3 ->
+        .flatMapIndexed { i, entry1, ->
+            entries.subList(i + 1, entries.size).flatMapIndexed { j, entry2 ->
+                entries.subList(j + 1, entries.size).mapIndexed { k, entry3 ->
             if (i == j || j == k || i == k) null else Triple(entry1, entry2, entry3) } } }
         .dropWhile { it == null || it.first + it.second + it.third != target }
         .firstOrNull()
