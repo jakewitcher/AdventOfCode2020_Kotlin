@@ -2,10 +2,11 @@ import day1.findProductOfThreeExpenseReportEntriesEqualTo
 import day1.findProductOfTwoExpenseReportEntriesEqualTo
 import day2.countPasswordsValidatedBySledRentalPolicy
 import day2.countPasswordsValidatedByTobogganRentalPolicy
+import day3.Slope
+import day3.countTreesAlongRoute
 
 fun main(args: Array<String>) {
-    day2Part1()
-    day2Part2()
+    day3Part1()
 }
 
 fun day1Part1() {
@@ -26,4 +27,9 @@ fun day2Part1() {
 fun day2Part2() {
     val count = countPasswordsValidatedByTobogganRentalPolicy(day2.readInputFile())
     println("valid toboggan rental passwords: $count")
+}
+
+fun day3Part1() {
+    val count = countTreesAlongRoute(day3.readInputFile(), Slope(1,3))
+    println("number of trees along route: $count")
 }
