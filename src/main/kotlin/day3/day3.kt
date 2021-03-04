@@ -5,16 +5,22 @@ import java.io.File
 data class Slope(val down: Int, val right: Int)
 data class Position(val row: Int, val column: Int)
 
-fun countTreesAlongRoute(forrestMap: List<String>, slope: Slope): Int {
+fun countTreesAlongRoute(forrestMap: List<String>, slope: Slope): Long {
     return forrestMap.foldIndexed(0) { i, acc, row ->
-        val position = Position(
-            getRow(i, slope.down),
-            getColumn(slope.right, i+1, row.length)
-        )
+        if (i % slope.down != 0) {
+            acc
+        } else {
+            val multiplier = i / slope.down + 1
 
-        val char = getCharAt(position, forrestMap)
+            val position = Position(
+                getRow(i, slope.down),
+                getColumn(slope.right, multiplier, row.length)
+            )
 
-        if (char != null && isTree(char)) acc + 1 else acc
+            val char = getCharAt(position, forrestMap)
+
+            if (char != null && isTree(char)) acc + 1 else acc
+        }
     }
 }
 
